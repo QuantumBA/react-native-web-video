@@ -1,10 +1,73 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { ViewPropTypes, createElement } from 'react-native';
 import applyNativeMethods from 'react-native-web/src/modules/applyNativeMethods';
 
 import { PropTypes } from 'prop-types';
 
-class ReactNativeVideo extends Component {
+type Item = any;
+
+type NormalProps = {
+  /* Native only */
+  source: Object,
+  seek?: ?number,
+  fullscreen?: ?boolean,
+  onVideoLoadStart?: ?Function,
+  onVideoLoad?: ?Function,
+  onVideoBuffer?: ?Function,
+  onVideoError?: ?Function,
+  onVideoProgress?: ?Function,
+  onVideoSeek?: ?Function,
+  onVideoEnd?: ?Function,
+  onTimedMetadata?: ?Function,
+  onVideoFullscreenPlayerWillPresent?: ?Function,
+  onVideoFullscreenPlayerDidPresent?: ?Function,
+  onVideoFullscreenPlayerWillDismiss?: ?Function,
+  onVideoFullscreenPlayerDidDismiss?: ?Function,
+  onLoadStart?: ?Function,
+  onLoad?: ?Function,
+  onBuffer: ?Function,
+  onError: ?Function,
+  onProgress: ?Function,
+  onSeek: ?Function,
+  onEnd: ?Function,
+
+  // resizeMode: PropTypes.string,
+  // poster: PropTypes.string,
+  // repeat: PropTypes.bool,
+  // paused: PropTypes.bool,
+  // muted: PropTypes.bool,
+  // volume: PropTypes.number,
+  // rate: PropTypes.number,
+  // playInBackground: PropTypes.bool,
+  // playWhenInactive: PropTypes.bool,
+  // ignoreSilentSwitch: PropTypes.oneOf(['ignore', 'obey']),
+  // disableFocus: PropTypes.bool,
+  // controls: PropTypes.bool,
+  // currentTime: PropTypes.number,
+  // progressUpdateInterval: PropTypes.number,
+  // onFullscreenPlayerWillPresent: PropTypes.func,
+  // onFullscreenPlayerDidPresent: PropTypes.func,
+  // onFullscreenPlayerWillDismiss: PropTypes.func,
+  // onFullscreenPlayerDidDismiss: PropTypes.func,
+  // onReadyForDisplay: PropTypes.func,
+  // onPlaybackStalled: PropTypes.func,
+  // onPlaybackResume: PropTypes.func,
+  // onPlaybackRateChange: PropTypes.func,
+  // onAudioFocusChanged: PropTypes.func,
+  // onAudioBecomingNoisy: PropTypes.func,
+};
+
+/* $FlowFixMe - the renderItem passed in from SectionList is optional there but
+ * required here */
+type Props = NormalProps;
+
+class ReactNativeVideo extends Component<Props> {
+
+  setNativeProps(props: Object) {
+    if (this._videoRef) {
+      this._videoRef.setNativeProps(props);
+    }
+  }
 
   _assignRoot = (component) => {
     this._root = component;
@@ -126,23 +189,31 @@ class ReactNativeVideo extends Component {
     }
   };
 
+  _captureRef = ref => {
+    /* $FlowFixMe(>=0.53.0 site=react_native_fb,react_native_oss) This comment
+     * suppresses an error when upgrading Flow's support for React. To see the
+     * error delete this comment and run Flow. */
+    this._videoRef = ref;
+  };
+
   render() {
     const {
-      src,
+      source,
       volume,
     } = this.props;
 
     return createElement('video', {
-      src,
-      onloadstart: this._onLoadStart,
-      onloadeddata: this._onLoad,
-      onerror: this._onError,
-      onprogress: this._onProgress,
-      onseeking: this._onSeek,
-      onended: this._onEnd,
-      onloadedmetadata: this._onTimedMetadata,
-      oncanplay: this._onReadyForDisplay,
-      onstalled: this._onPlaybackStalled,
+      // ref: {this._captureRef}
+      src: source.uri || source,
+      onLoadStart: this._onLoadStart,
+      onLoadedData: this._onLoad,
+      onError: this._onError,
+      onProgress: this._onProgress,
+      onSeeking: this._onSeek,
+      onEnded: this._onEnd,
+      onLoadedMetadata: this._onTimedMetadata,
+      onCanPlay: this._onReadyForDisplay,
+      onStalled: this._onPlaybackStalled,
       volume,
     });
   }
