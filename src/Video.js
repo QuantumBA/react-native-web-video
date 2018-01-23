@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { ViewPropTypes, createElement } from 'react-native';
 import applyNativeMethods from 'react-native-web/src/modules/applyNativeMethods';
 
 import { PropTypes } from 'prop-types';
-
-type Item = any;
 
 type NormalProps = {
   /* Native only */
   source: Object,
   seek?: ?number,
   fullscreen?: ?boolean,
+  controls?: ?boolean,
   onVideoLoadStart?: ?Function,
   onVideoLoad?: ?Function,
   onVideoBuffer?: ?Function,
@@ -200,6 +199,7 @@ class ReactNativeVideo extends Component<Props> {
     const {
       source,
       volume,
+      controls,
     } = this.props;
 
     return createElement('video', {
@@ -215,6 +215,7 @@ class ReactNativeVideo extends Component<Props> {
       onCanPlay: this._onReadyForDisplay,
       onStalled: this._onPlaybackStalled,
       volume,
+      controls,
     });
   }
 }
