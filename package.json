@@ -1,0 +1,27 @@
+{
+    "name": "react-native-web-video",
+    "version": "0.0.1",
+    "description": "A <Video /> element for react-native-web inspired in react-native-video",
+    "main": "src/Video.js",
+    "license": "MIT",
+    "author": "Adrián Insausti <ainsausti@quantum-ba.com> (https://github.com/adrianicv)",
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:QuantumBA/react-native-web-video.git"
+    },
+    "devDependencies": {
+        "jest-cli": "0.2.1",
+        "eslint": "1.10.3",
+        "babel-eslint": "5.0.0-beta9",
+        "eslint-plugin-react": "3.16.1",
+        "eslint-config-airbnb": "4.0.0"
+    },
+    "dependencies": {
+        "prop-types": "^15.5.10",
+        "react-native-web": "^0.3.2"
+    },
+    "scripts": {
+        "test": "node_modules/.bin/eslint *.js"
+    }
+}
