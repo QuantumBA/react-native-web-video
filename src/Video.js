@@ -29,6 +29,10 @@ type NormalProps = {
   onProgress: ?Function,
   onSeek: ?Function,
   onEnd: ?Function,
+  width?: ?number,
+  heigth?: ?number,
+  style: ?PropTypes.StyleSheet,
+
 
   // resizeMode: PropTypes.string,
   // poster: PropTypes.string,
@@ -200,10 +204,10 @@ class ReactNativeVideo extends Component<Props> {
       source,
       volume,
       controls,
+      style,
     } = this.props;
 
     return createElement('video', {
-      // ref: {this._captureRef}
       src: source.uri || source,
       onLoadStart: this._onLoadStart,
       onLoadedData: this._onLoad,
@@ -216,13 +220,13 @@ class ReactNativeVideo extends Component<Props> {
       onStalled: this._onPlaybackStalled,
       volume,
       controls,
+      style,
     });
   }
 }
 
 ReactNativeVideo.propTypes = {
   /* Native only */
-  src: PropTypes.object,
   seek: PropTypes.number,
   fullscreen: PropTypes.bool,
   onVideoLoadStart: PropTypes.func,
@@ -237,6 +241,7 @@ ReactNativeVideo.propTypes = {
   onVideoFullscreenPlayerDidPresent: PropTypes.func,
   onVideoFullscreenPlayerWillDismiss: PropTypes.func,
   onVideoFullscreenPlayerDidDismiss: PropTypes.func,
+  style: PropTypes.StyleSheet,
 
   /* Wrapper component */
   source: PropTypes.oneOfType([
