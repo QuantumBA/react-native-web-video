@@ -1,3 +1,3 @@
-import Video from './ReactNativeVideo';
+import Video from './Video';
 
 export default Video;

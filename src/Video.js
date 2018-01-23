@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { ViewPropTypes, createElement } from 'react-native';
-import applyNativeMethods from 'react-native-web/src/modules/applyNativeMethods';
 
 import { PropTypes } from 'prop-types';
 
@@ -64,7 +63,7 @@ type NormalProps = {
  * required here */
 type Props = NormalProps;
 
-class ReactNativeVideo extends Component<Props> {
+class Video extends Component<Props> {
 
   setNativeProps(props: Object) {
     if (this._videoRef) {
@@ -225,7 +224,7 @@ class ReactNativeVideo extends Component<Props> {
   }
 }
 
-ReactNativeVideo.propTypes = {
+Video.propTypes = {
   /* Native only */
   seek: PropTypes.number,
   fullscreen: PropTypes.bool,
@@ -292,4 +291,4 @@ ReactNativeVideo.propTypes = {
   ...ViewPropTypes,
 };
 
-export default applyNativeMethods(ReactNativeVideo);
+export default Video;
