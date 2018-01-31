@@ -1,5 +1,7 @@
 ## react-native-web-video
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/QuantumBA/react-native-web-video.svg)](https://greenkeeper.io/)
+
 A `<Video>` component for react-native-web, as seen in
 
 **WARNING: In current development**
